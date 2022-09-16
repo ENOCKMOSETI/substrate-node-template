@@ -270,6 +270,11 @@ impl pallet_template::Config for Runtime {
 	type Event = Event;
 }
 
+/// impl mpesa_user_pallet
+impl pallet_mpesa_user::Config for Runtime {
+	type Event = Event;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub struct Runtime
@@ -288,6 +293,7 @@ construct_runtime!(
 		Sudo: pallet_sudo,
 		// Include the custom logic from the pallet-template in the runtime.
 		TemplateModule: pallet_template,
+		MpesaUser: pallet_mpesa_user::{Pallet, Call, Storage, Event<T>},
 	}
 );
 
@@ -333,6 +339,7 @@ mod benches {
 		[pallet_balances, Balances]
 		[pallet_timestamp, Timestamp]
 		[pallet_template, TemplateModule]
+		[pallet_mpesa_user, MpesaUser]
 	);
 }
 
